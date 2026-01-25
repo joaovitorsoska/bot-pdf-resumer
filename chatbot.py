@@ -5,12 +5,11 @@ import nltk
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize, sent_tokenize
 
-API_key = "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"
-os.environ["OPENAI_API_KEY"] = API_key
+
 
 chat = ChatOpenAI(
     model= "meta-llama/llama-3.1-8b-instruct",
-    openai_api_key= API_key,
+    openai_api_key = os.getenv("OPENAI_API_KEY"),
     openai_api_base= "https://openrouter.ai/api/v1",
 )
 
