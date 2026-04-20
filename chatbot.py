@@ -4,6 +4,10 @@ from PyPDF2 import PdfReader
 import nltk
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize, sent_tokenize
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 
 
