@@ -1,14 +1,13 @@
 from dotenv import load_dotenv
 import os
-from langchain_community.chat_models import ChatOpenAI
+from groq import Groq
 from PyPDF2 import PdfReader
 
 load_dotenv()
 
-chat = ChatOpenAI(
-    model="meta-llama/llama-3.1-8b-instruct",
-    openai_api_key=os.getenv("OPENAI_API_KEY"),
-    openai_api_base="https://openrouter.ai/api/v1",
+
+client = Groq(
+    api_key=os.getenv("GROQ_API_KEY"),
 )
 
 
@@ -20,6 +19,8 @@ def resumir_pdf(file):
     for pagina in leitor.pages:
         texto += pagina.extract_text()
 
+    texto = texto[:4000]
+
     prompt = f"""
     Resuma o texto abaixo em português, de forma clara e objetiva.
     Máximo de 20 linhas.
@@ -28,5 +29,11 @@ def resumir_pdf(file):
     {texto}
     """
 
-    resposta = chat.invoke(prompt)
-    return resposta.content
+    response = client.chat.completions.create(
+    model="llama-3.1-8b-instant",
+    messages=[
+        {"role": "user", "content": prompt}
+    ],
+)
+
+    return response.choices[0].message.content 

@@ -1,5 +1,5 @@
 import os
-from langchain_community.chat_models import ChatOpenAI
+from langchain_openai import ChatOpenAI
 from PyPDF2 import PdfReader
 import nltk
 from nltk.corpus import stopwords
