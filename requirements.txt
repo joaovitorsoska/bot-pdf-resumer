@@ -1,7 +1,5 @@
 streamlit
 PyPDF2
-langchain-community
-openai
 python-dotenv
-nltk
+
 
